@@ -1,7 +1,8 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import Represent from "./components/Represent"
 import Query from "./components/Query"
 import Statistics from "./components/Statististics"
+import { IBeesProps } from "./interface/App";
 
 /**路径两个重要的点：
  * 1.在node_nodule里面引入依赖不需要写路径
@@ -10,11 +11,16 @@ import Statistics from "./components/Statististics"
 
 
 const App: FC = ():JSX.Element => {
+    //两个子组件的通信，状态提升
+    //IBeesProps类型的数组，也就是说beesList里面的每一个元素，都是IBeesProps类型的
+    const [beesLists, setBeesList] = useState<IBeesProps[]>([]);
+
     return (
         <div>
             <Statistics/>
-            <Query/>
-            <Represent/>
+            <Query setBeesList={setBeesList}/>
+            {/* beesList是一个形参， beesLists是定义的一个变量，这是一个赋值的过程 */}
+            <Represent beesList={beesLists}/> 
         </div>
     )
 }

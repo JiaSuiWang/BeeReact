@@ -1,6 +1,11 @@
 import React, { FC } from "react"
+import { IBeesProps } from "../../interface/App";
 
-const Represent: FC = ():JSX.Element=>{
+interface IProps {
+    beesList: IBeesProps[]
+}
+//解构：接受interface里面的对象，因为interface本质上就是一个对象用{}表示，所以解构的时候也要{}
+const Represent: FC<IProps> = ({beesList}):JSX.Element=>{
     return(
         <div>
             <p><b>Lists of Bees</b></p>
@@ -22,30 +27,24 @@ const Represent: FC = ():JSX.Element=>{
                         <th>tansformationRate</th>
                         <th>action</th>
                     </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>6.6</td>
-                        <td>55.7</td>
-                        <td>32.7</td>
-                        <td>89.7</td>
-                        <td>79</td>
-                        <td>68</td>
-                        <td>50</td>
-                        <td>26</td>
-                        <td>0.52</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>6.6</td>
-                        <td>55.7</td>
-                        <td>32.7</td>
-                        <td>89.7</td>
-                        <td>79</td>
-                        <td>68</td>
-                        <td>50</td>
-                        <td>26</td>
-                        <td>0.52</td>
-                    </tr>
+                    {
+                        beesList.map((v, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{v.id}</td> 
+                                    <td>{v.speed}</td> 
+                                    <td>{v.latitude}</td> 
+                                    <td>{v.longitude}</td> 
+                                    <td>{v.elevation}</td> 
+                                    <td>{v.fuel}</td> 
+                                    <td>{v.damage}</td>
+                                    <td>{v.nectar}</td> 
+                                    <td>{v.honey}</td> 
+                                    <td>{v.tansformationRate}</td> 
+                                </tr>
+                            )
+                        })
+                    }
                 </tbody>
 
             </table>

@@ -1,18 +1,70 @@
-import React, { FC } from "react"
+import React, { ChangeEvent, FC, useState } from "react"
+import { IBeesProps } from "../../interface/App"
 
-const Query: FC = ():JSX.Element=>{
-    return(
+
+interface IParamsProps {
+    fuel: string;
+    damage: string;
+}
+
+interface IProps {
+    setBeesList: React.Dispatch<React.SetStateAction<IBeesProps[]>>
+}
+
+//IProps意思是该函数接受一个这种类型的参数 <参数类型>
+//(参数名) 用这个参数名的形参，来接受实际参数
+const Query: FC<IProps> = ({setBeesList}): JSX.Element => {
+    
+    //定义变量
+    const [params, setParams] = useState<IParamsProps>({
+        fuel: '1',
+        damage: '2'
+    })
+
+    //定义响应的API1
+    //绑定在onChange事件的函数一定有一个ChangeEvent<HTMLInputElement>类型的参数
+    //这个函数有两个功能：1.触发视图更新 2.修改变量的值
+    const handleChange = (event: ChangeEvent<HTMLInputElement>, key: string): void => {
+        //这里触发的输入框的视图更新
+        setParams({
+            ...params, //解构 看ES6
+            [key]: event.target.value //获取到更新的对象的值  //[key]代表解构出来对象名为key的键
+        })
+        // Object.assign(params, { fuel: event.target.value })
+        //对象合并，后面的覆盖掉，其他不动
+    }
+
+    //定义响应的API2
+    const handleEearch = ():void => {
+        console.log(params)
+        const a: any[] = [{
+            id: 1, 
+            speed: 1.1, 
+            latitude: 2, 
+            longitude: 3, 
+            elevation: 4, 
+            fuel: 5, 
+            damage: 6, 
+            nectar: 7, 
+            honey: 8, 
+            tansformationRate: 10, 
+        }]
+        setBeesList(a)
+    }
+
+
+    return (
         <div>
             <p><b>Search</b></p>
             <form action="">
                 <label htmlFor="">Fuel({'<'}%)</label>
-                <input type="text"/>
+                <input type="text" value={params.fuel} onChange={(e) => handleChange(e, 'fuel')} />
             </form>
             <form action="">
                 <label htmlFor="">Damage({'>'}%)</label>
-                <input type="text"/>
+                <input type="text" value={params.damage} onChange={(e) => handleChange(e, 'damage')}/>
             </form>
-            <button>search</button>
+            <button onClick={handleEearch}>search</button>
             <button>reset</button>
             <button>add</button>
         </div>

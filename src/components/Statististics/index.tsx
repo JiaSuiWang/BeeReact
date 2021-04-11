@@ -1,10 +1,7 @@
-import React, { FC, CSSProperties, useState } from "react"
+import React, { FC, useState } from "react"
 import { useEffect } from "react";
-import { isConstructorDeclaration } from "typescript";
-import styles from './index.module.css'; 
 //把整个css文件引入过来，当作一个style（相当于dom）        import "./index.css"
-{/* JS中的import 代替了HTML中的<link rel="stylesheet" href="styles.css"></link> */}
-
+/* JS中的import 代替了HTML中的<link rel="stylesheet" href="styles.css"></link> */
 //因为import './index.css'会导致全局样式的样式冲突问题，为了避免，所以使用module.css
 //原理：为每一个css都创建一个随机字符串来保证class的唯一性
 
@@ -28,14 +25,22 @@ import styles from './index.module.css';
 // let amountStateOverSixty = 3;
 
 
-
+// 好的页面结构：
+// 1.在Statistics function之前可以写定义好的常量
+// 2.在Statistics代码块里面
+//     1.写useState方法来定义变量
+//     2.定义API
+//     3.写好useEffect定义好监听函数
+//     4.写return里面的div
 
 const Statistics: FC = (): JSX.Element => {
+    //
     const [nectar, setNectar] = useState<number>(100)
-    const [honey, setHoney] = useState<number>(100)
-    const [amountBee, setAmountBee] = useState<number>(9)
-    const [amountFuelOverSixty, setAmountFuelOverSixty] = useState<number>(4)
-    const [amountStateOverSixty, setAmountStateOverSixty] = useState<number>(3)
+    const [honey] = useState<number>(100)
+    const [amountBee] = useState<number>(9)
+    const [amountFuelOverSixty] = useState<number>(4)
+    const [amountStateOverSixty] = useState<number>(3)
+
 
     //evenlistner (本质是一个callback函数)
     const runStatisticeAPI = () =>{
