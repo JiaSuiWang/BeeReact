@@ -48,6 +48,21 @@ const Statistics: FC = (): JSX.Element => {
     }
     useEffect(runStatisticeAPI, [])//如果这个地方不传入参数的话，相当于页面初始化的时候执行，且仅执行一次
 
+
+    //什么时候统计的表单会刷新
+        //1.新增，修改，删除的时候，统计数据
+        //2.当打开页面的时候统计数据需要刷新-useEffect，监听参数为空
+    // useEffect(() => {
+    //     const fetch = () => {
+    //         //做请求
+    //         console.log("请求数据")
+    //     }
+    //     fetch();
+    // }, [])
+
+
+
+
     return (
         //JSX Element里面声明变量必须用一层大括号给包裹起来，对于object，Ts的语法依然是一层大括号，里面的元素用逗号分隔
         <div>

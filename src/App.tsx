@@ -1,8 +1,17 @@
+// 1.项目框架设计
+// 2.写前端页面
+// 3.写前端部件通信
+// 4.写前端API
+// 5.后端连接数据库
+// 6.后端API
+// 7.前后端连调（接口）
+
 import React, {FC, useState} from "react";
 import Represent from "./components/Represent"
 import Query from "./components/Query"
 import Statistics from "./components/Statististics"
 import { IBeesProps } from "./interface/App";
+import Test from "./components/Test";
 
 /**路径两个重要的点：
  * 1.在node_nodule里面引入依赖不需要写路径
@@ -14,13 +23,17 @@ const App: FC = ():JSX.Element => {
     //两个子组件的通信，状态提升
     //IBeesProps类型的数组，也就是说beesList里面的每一个元素，都是IBeesProps类型的
     const [beesLists, setBeesList] = useState<IBeesProps[]>([]);
-
     return (
         <div>
             <Statistics/>
-            <Query setBeesList={setBeesList}/>
+            <Query 
+                setBeesList={setBeesList} 
+                // 这个不用看，只是为展示一下添加之后，表格内容
+                beesList={beesLists}
+            />
             {/* beesList是一个形参， beesLists是定义的一个变量，这是一个赋值的过程 */}
             <Represent beesList={beesLists}/> 
+            <Test/>
         </div>
     )
 }
